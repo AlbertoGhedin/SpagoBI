@@ -6,13 +6,13 @@ ENV SPAGOBI_URL=https://github.com/SpagoBILabs/SpagoBI/releases/download/fiware-
 RUN apt-get update && apt-get install -y wget coreutils unzip mysql-client
 
 #download spagobi all in one and extract it
-WORKDIR /home
+WORKDIR /tmp
 RUN wget "${SPAGOBI_URL}" -O SpagoBI.zip && \
 	unzip SpagoBI.zip && \
 	mv ${SPAGOBI_VERSION} SpagoBI && \
 	rm SpagoBI.zip
 
-ENV SPAGOBI_DIRECTORY /home/SpagoBI
+ENV SPAGOBI_DIRECTORY /tmp/SpagoBI
 WORKDIR ${SPAGOBI_DIRECTORY}/bin
 
 #make the script executable by bash (not only sh) and
@@ -38,5 +38,3 @@ EXPOSE 8080
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["./startup.sh"]
 
-WORKDIR /home
-RUN chmod -R 777 *
