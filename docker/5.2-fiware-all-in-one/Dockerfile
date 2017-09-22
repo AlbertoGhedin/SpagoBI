@@ -37,3 +37,6 @@ EXPOSE 8080
 #-d option is passed to run spagobi forever without exiting from container
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["./startup.sh"]
+
+WORKDIR /home
+RUN chmod -R 777 *
